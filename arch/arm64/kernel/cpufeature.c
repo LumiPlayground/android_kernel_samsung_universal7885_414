@@ -33,6 +33,10 @@
 #include <asm/traps.h>
 #include <asm/virt.h>
 
+#define MIDR_MONGOOSE	MIDR_CPU_MODEL(ARM_CPU_IMP_SEC, ARM_CPU_PART_MONGOOSE)
+#define MIDR_MODEL_MASK	(MIDR_IMPLEMENTOR_MASK | MIDR_PARTNUM_MASK | \
+			MIDR_ARCHITECTURE_MASK)
+
 unsigned long elf_hwcap __read_mostly;
 EXPORT_SYMBOL_GPL(elf_hwcap);
 
@@ -555,6 +559,14 @@ void update_cpu_features(int cpu,
 			 struct cpuinfo_arm64 *boot)
 {
 	int taint = 0;
+
+	/*
+	 * In Exynos SOC, the sanity check for customized cores is meaningless
+	 * because it consists of non-arm CPUs.
+	 */
+	u32 midr = read_cpuid_id();
+	if ((midr & MIDR_MODEL_MASK) == MIDR_MONGOOSE)
+		return;
 
 	/*
 	 * The kernel can handle differing I-cache policies, but otherwise
