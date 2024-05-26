@@ -836,6 +836,12 @@
 	};
 
 	cpufreq-ufc {
+		/* Completely different in 4.14 */
+		device_type = "cpufreq_ufc";
+		table-col = <4>;
+		table-row = <10>;
+		fill-flag = <1>;
+
 		/* Ctrl Type */
 		#define PM_QOS_MIN_LIMIT		0
 		#define PM_QOS_MIN_WO_BOOST_LIMIT	1
@@ -845,50 +851,52 @@
 		#define AARCH32_MODE			1
 
 		domain@0 {
-			device_type = "cpufreq-userctrl";
+			device_type = "ufc_domain";
 			shared-cpus = "0-5";
 
-			user-default-qos = <839000>;
+			table-idx = <2>;
+			pm_qos-min-class = <3>;
+			pm_qos-max-class = <4>;
 		};
 
 		domain@1 {
-			device_type = "cpufreq-userctrl";
+			device_type = "ufc_domain";
 			shared-cpus = "6-7";
 
-			user-default-qos = <936000>;
-
-			min-limit {
-				ctrl-type = <PM_QOS_MIN_LIMIT>;
-				execution-mode = <AARCH64_MODE>;
-					/* big	    lit */
-				table = < 2184000 1586000
-					  2080000  839000
-					  1976000  839000
-					  1872000  839000
-					  1768000  839000
-					  1664000  839000
-					  1560000  839000
-					  1352000  839000
-					  1144000  839000
-					   936000  839000
-					   728000  839000 >;
-			};
+			table-idx = <0x1>;
+			pm_qos-min-class = <0x5>;
+			pm_qos-max-class = <0x6>;
 
 			max-limit {
+				device_type = "ufc_table";
 				ctrl-type = <PM_QOS_MAX_LIMIT>;
-				execution-mode = <AARCH64_MODE>;
-					/* big	    lit */
-				table = < 2184000 1586000
-					  2080000 1586000
-					  1976000 1586000
-					  1872000 1586000
-					  1768000 1586000
-					  1664000 1586000
-					  1560000 1586000
-					  1352000 1586000
-					  1144000 1352000
-					   936000 1248000
-					   728000 1248000 >;
+				sse-mode = <AARCH64_MODE>;
+					/* wtf */
+				table = <0x215340 0x215340 0x19c990 0x0 0x1fbd00 0x1fbd00 0x19c990 0x0 0x1e26c0 0x1e26c0 0x19c990 0x0 0x1c9080 0x1c9080 0x19c990 0x0 0x1afa40 0x1afa40 0x19c990 0x0 0x196400 0x196400 0x19c990 0x0 0x17cdc0 0x17cdc0 0x19c990 0x0 0x14a140 0x14a140 0x19c990 0x0 0x1174c0 0x1174c0 0x19c990 0x0 0xe4840 0xe4840 0x19c990 0x0>;
+			};
+
+			max-limit-32 {
+				device_type = "ufc_table";
+				ctrl-type = <PM_QOS_MAX_LIMIT>;
+				sse-mode = <AARCH32_MODE>;
+					/* wtf */
+				table = <0x215340 0x215340 0x19c990 0x0 0x1fbd00 0x1fbd00 0x19c990 0x0 0x1e26c0 0x1e26c0 0x19c990 0x0 0x1c9080 0x1c9080 0x19c990 0x0 0x1afa40 0x1afa40 0x19c990 0x0 0x196400 0x196400 0x19c990 0x0 0x17cdc0 0x17cdc0 0x19c990 0x0 0x14a140 0x14a140 0x19c990 0x0 0x1174c0 0x1174c0 0x19c990 0x0 0xe4840 0xe4840 0x19c990 0x0>;
+			};
+
+			min-limit {
+				device_type = "ufc_table";
+				ctrl-type = <PM_QOS_MIN_LIMIT>;
+				sse-mode = <AARCH64_MODE>;
+					/* wtf */
+				table = <0x215340 0x215340 0x19c990 0x1 0x1fbd00 0x1fbd00 0x19c990 0x1 0x1e26c0 0x1e26c0 0x19c990 0x1 0x1c9080 0x1c9080 0x19c990 0x1 0x1afa40 0x1afa40 0x19c990 0x1 0x196400 0x196400 0x6d9e8 0x1 0x17cdc0 0x17cdc0 0x6d9e8 0x1 0x14a140 0x14a140 0x6d9e8 0x1 0x1174c0 0x1174c0 0x6d9e8 0x1 0xe4840 0xe4840 0x6d9e8 0x1>;
+			};
+
+			min-limit-32 {
+				device_type = "ufc_table";
+				ctrl-type = <PM_QOS_MIN_LIMIT>;
+				sse-mode = <AARCH32_MODE>;
+					/* wtf */
+				table = <0x215340 0x215340 0x19c990 0x1 0x1fbd00 0x1fbd00 0x19c990 0x1 0x1e26c0 0x1e26c0 0x19c990 0x1 0x1c9080 0x1c9080 0x19c990 0x1 0x1afa40 0x1afa40 0x19c990 0x1 0x196400 0x196400 0x6d9e8 0x1 0x17cdc0 0x17cdc0 0x6d9e8 0x1 0x14a140 0x14a140 0x6d9e8 0x1 0x1174c0 0x1174c0 0x6d9e8 0x1 0xe4840 0xe4840 0x6d9e8 0x1>;
 			};
 		};
 	};
