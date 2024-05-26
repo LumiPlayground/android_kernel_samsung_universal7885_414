@@ -11,6 +11,7 @@
 
 /dts-v1/;
 #include "exynos7885-jackpotlte_common.dtsi"
+#include "exynos7885-jackpotlte_eur_can_common.dts"
 //Actually common
 //#include "exynos7885-jackpotlte_fingerprint-sensor_00.dtsi"
 //#include "exynos7885-jackpotlte_eur_open_gpio_07.dtsi"
