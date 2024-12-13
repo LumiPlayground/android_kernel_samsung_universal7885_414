@@ -17,8 +17,7 @@
 //#include "exynos7885-jackpotlte_eur_open_gpio_03.dtsi"
 //Actually common
 //#include "exynos7885-jackpotlte_mst_02.dtsi"
-//Actually common
-//#include "exynos7885-jackpotlte_svcled.dtsi"
+#include "exynos7885-jackpotlte_svcled.dtsi"
 
 / {
 	model = "Samsung JACKPOTLTE EUR rev03 board based on EXYNOS7885";
