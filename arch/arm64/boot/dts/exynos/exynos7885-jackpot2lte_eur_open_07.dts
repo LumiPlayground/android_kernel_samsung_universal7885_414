@@ -10,21 +10,21 @@
 */
 
 /dts-v1/;
-#include "exynos7885-jackpotlte_common.dtsi"
+#include "exynos7885-jackpot2lte_common.dtsi"
 //#include "exynos7885-jackpotlte_fingerprint-sensor_00.dtsi"
-#include "exynos7885-jackpotlte_eur_open_gpio_07.dtsi"
+#include "exynos7885-jackpot2lte_eur_open_gpio_07.dtsi"
 #include "exynos7885-jackpotlte_mst_02.dtsi"
-#include "exynos7885-jackpotlte_svcled.dtsi"
+#include "exynos7885-jackpot2lte_svcled.dtsi"
 
 / {
-	model = "Samsung JACKPOTLTE EUR rev07 board based on EXYNOS7885";
+	model = "Samsung JACKPOT2LTE EUR rev07 board based on EXYNOS7885";
 	model_info-chip = <7885>;
 	model_info-platform = "android";
 	model_info-subtype = "samsung";
 	model_info-hw_rev = <7>;
 	model_info-hw_rev_end = <255>;
-	compatible = "samsung, JACKPOTLTE EUR rev07", "samsung,Universal7885";
-	
+	compatible = "samsung, JACKPOT2LTE EUR rev07", "samsung,Universal7885";
+
 	/* USIM DETECTION FOR CP */
 	usim_det {
 		pinctrl-names = "default";

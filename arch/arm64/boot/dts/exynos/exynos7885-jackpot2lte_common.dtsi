@@ -10,10 +10,10 @@
 */
 
 #include "exynos7885.dtsi"
-#include "display-lcd_jackpot_common.dtsi"
+#include "display-lcd_jackpot2_common.dtsi"
 #include "modem-s327ap-sipc-pdata.dtsi"
-#include "battery_data_jackpotlte_common.dtsi"
-#include "exynos7885-jackpotlte_motor.dtsi"
+#include "battery_data_jackpot2lte_common.dtsi"
+#include "exynos7885-jackpot2lte_motor.dtsi"
 #include "exynos7885-mali.dtsi"
 
 / {
@@ -32,7 +32,12 @@
 
 	memory@880000000 {
 		device_type = "memory";
-		reg = <0x00000008 0x80000000 0x40000000>;
+		reg = <0x00000008 0x80000000 0x0>;
+	};
+
+	memory@900000000 {
+		device_type = "memory";
+		reg = <0x00000009 0x00000000 0x0>;
 	};
 
 	chosen {
@@ -77,7 +82,7 @@
 			mic-bias-ldo-voltage = <3>;
 			use-btn-adc-mode;
 			use-det-gdet-adc-mode = <1>;
-			jack-imp-tuning = <7>;
+			jack-imp-tuning = <9>;
 			io-channels = <&exynos_adc 3>,<&exynos_adc 7>;
 			io-channel-names = "adc-ear","adc-gdet";
 			#io-channel-cells = <1>;
@@ -368,12 +373,14 @@
 		thermistor_name = "sec-ap-thermistor";
 		id = <0>;
 
-		adc_array = <235 308 378 395 467 568 603 648 698 764
-				908 1066 1170 1242 1327 1430 1633 1830 2061 2282
-				2409 2500 2584 2697 2880 3069 3213 3337 3447>;
-		temp_array = <900 850 800 750 700 650 620 600 580 550
-				500 450 420 400 380 350 300 250 200 150
-				120 100 80 50 0 (-50) (-100) (-150) (-200)>;
+		adc_array = <280 391 423 642 673 688 779 799 859 926
+			993 1040 1115 1178 1345 1552 1755 1976 2210 2396
+			2638 2717 2828 2894 2959 2992 3018 3076 3120 3205
+			3296 3412 3523>;
+		temp_array = <900 800 750 650 620 600 580 570 550 530
+			510 490	470 450 400 350 300 250 200 150
+			100 80 50 30 10 0 (-10) (-30) (-50) (-70)
+			(-100) (-150) (-200)>;
 		io-channels = <&exynos_adc 0>;
 		io-channel-names = "adc-ap-temp";
 		io-channel-ranges;
@@ -385,12 +392,14 @@
 		thermistor_name = "sec-wf-thermistor";
 		id = <1>;
 
-		adc_array = <235 308 378 395 467 568 603 648 698 764
-				908 1066 1170 1242 1327 1430 1633 1830 2061 2282
-				2409 2500 2584 2697 2880 3069 3213 3337 3447>;
-		temp_array = <900 850 800 750 700 650 620 600 580 550
-				500 450 420 400 380 350 300 250 200 150
-				120 100 80 50 0 (-50) (-100) (-150) (-200)>;
+		adc_array = <280 391 423 642 673 688 779 799 859 926
+			993 1040 1115 1178 1345 1552 1755 1976 2210 2396
+			2638 2717 2828 2894 2959 2992 3018 3076 3120 3205
+			3296 3412 3523>;
+		temp_array = <900 800 750 650 620 600 580 570 550 530
+			510 490	470 450 400 350 300 250 200 150
+			100 80 50 30 10 0 (-10) (-30) (-50) (-70)
+			(-100) (-150) (-200)>;
 		io-channels = <&exynos_adc 6>;
 		io-channel-names = "adc-wf-temp";
 		io-channel-ranges;
@@ -1345,10 +1354,10 @@ or "hsi2c0_hsi2c1" or "uart_hsi2c1"
 		sec,regulator_boot_on;
 		sec,grip_area = <512>;
 		sec,bringup = <3>;
-		sec,project_name = "JACKPOT1", "A530";
-		sec,firmware_name = "tsp_sec/y661_a5y18.fw", "tsp_sec/y661_a5y18.fw";
+		sec,project_name = "JACKPOT2", "A730";
+		sec,firmware_name = "tsp_sec/y661_a7y18.fw", "tsp_sec/y661_a7y18.fw";
 		sec,tclm_level = <2>;
-		sec,afe_base = <0x05>;
+		sec,afe_base = <0x04>;
 		status = "okay";
 	};
 };
@@ -1374,7 +1383,7 @@ or "hsi2c0_hsi2c1" or "uart_hsi2c1"
 		abov,scl-gpio = <&gpp4 3 0>;
 		abov,irq-gpio = <&gpa2 7 0>;
 		abov,tkey_en-gpio = <&gpg2 5 0>;
-		abov,firmware_name = "abov/a96t326_a5y18.fw";
+		abov,firmware_name = "abov/a96t326_a7y18.fw";
 		abov,firmup_cmd = <0x32>;
 		abov,ta-notifier;
 		abov,not_support_key;
