@@ -1,10 +1,8 @@
 #
 # SAMSUNG SoC drivers
 #
-menuconfig SOC_SAMSUNG
-	bool "Samsung SoC driver support" if COMPILE_TEST
+menu "Samsung SoC drivers"
 
-if SOC_SAMSUNG
 config EXYNOS_CHIPID
 	bool "Exynos Chip ID Driver Support"
 	depends on ARCH_EXYNOS
@@ -29,14 +27,14 @@ config EXYNOS_BCM_DBG_DUMP
 	help
 	  Enable exynos-bcm_dbg dump support
 
+config EXYNOS_REBOOT
+	bool "Exynos Chip Reboot Driver Support"
+	depends on ARCH_EXYNOS
+
 config CAL_IF
 	bool "Exynos Chip Abstraction Layer Interface"
 	help
 	  Support CMU CAL for Exynos SoC.
-
-config EXYNOS_REBOOT
-	bool "Exynos Chip Reboot Driver Support"
-	depends on ARCH_EXYNOS
 
 config CMUCAL
 	bool "Exynos CMU Chip Abstraction Layer"
@@ -87,10 +85,6 @@ config SHUB_PMUCAL
 	depends on CAL_IF
 	help
 	  Support SHUB_PMUCAL for Exynos SoC.
-
-config CMUCAL_DEBUG
-	bool "CMUCAL Debug Interface"
-	depends on CMUCAL
 
 config EXYNOS_PMU
 	bool "Exynos Power Management Unit Driver Support"
@@ -194,4 +188,4 @@ config DEBUG_SNAPSHOT_LOGGING_SMC
 
 source "drivers/soc/samsung/exynos-hdcp/Kconfig"
 
-endif
+endmenu
