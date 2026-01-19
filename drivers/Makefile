@@ -212,3 +212,6 @@ obj-$(CONFIG_SENSORS)		+= sensors/
 # uH
 obj-$(CONFIG_UH)		+= uh/
 
+# Fingerprint
+obj-$(CONFIG_SENSORS_FINGERPRINT) += fingerprint/
+
