@@ -30,11 +30,6 @@ config EXYNOS_BCM_DBG_DUMP
 	help
 	  Enable exynos-bcm_dbg dump support
 
-config EXYNOS_BCM
-	bool "EXYNOS_BCM driver support"
-	help
-	  Enable exynos_bcm driver support
-
 config CAL_IF
 	bool "Exynos Chip Abstraction Layer Interface"
 	help

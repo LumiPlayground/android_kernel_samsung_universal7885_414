@@ -12,7 +12,6 @@
 #include "fimc-is-hw-control.h"
 #include "sfr/fimc-is-sfr-isp-v310.h"
 #include "fimc-is-err.h"
-#include <soc/samsung/bcm.h>
 
 bool check_dma_done(struct fimc_is_hw_ip *hw_ip, u32 instance_id, u32 fcount)
 {
@@ -255,7 +254,6 @@ static void fimc_is_lib_io_callback(void *this, enum lib_cb_event_type event_id,
 		break;
 	case LIB_EVENT_ERROR_CIN_OVERFLOW:
 		fimc_is_debug_event_count(FIMC_IS_EVENT_OVERFLOW_3AA);
-		bcm_stop(NULL);
 		msinfo_hw("LIB_EVENT_ERROR_CIN_OVERFLOW\n", instance_id, hw_ip);
 		fimc_is_hardware_flush_frame(hw_ip, FS_HW_CONFIGURE, IS_SHOT_OVERFLOW);
 

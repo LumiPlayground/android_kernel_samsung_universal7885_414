@@ -76,10 +76,7 @@ static void exynos_pd_power_on_pre(struct exynos_pm_domain *pd)
 static void exynos_pd_power_on_post(struct exynos_pm_domain *pd)
 {
 	int ret;
-#if defined(CONFIG_EXYNOS_BCM)
-	if(cal_pd_status(pd->cal_pdid) && pd->bcm)
-		bcm_pd_sync(pd->bcm, true);
-#endif
+
 	if (pd->need_smc) {
 		ret = exynos_tz_peri_restore(pd->need_smc);
 		if (ret)
@@ -96,10 +93,6 @@ static void exynos_pd_power_off_pre(struct exynos_pm_domain *pd)
 		exynos_g3d_power_down_noti_apm();
 	}
 #endif /* CONFIG_EXYNOS_CL_DVFS_G3D */
-#if defined(CONFIG_EXYNOS_BCM)
-	if(cal_pd_status(pd->cal_pdid) && pd->bcm)
-		bcm_pd_sync(pd->bcm, false);
-#endif
 	if (pd->need_smc) {
 		ret = exynos_tz_peri_save(pd->need_smc);
 		if (ret)
