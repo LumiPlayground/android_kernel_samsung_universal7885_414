@@ -147,9 +147,6 @@ static void regmode_vote(struct s2mu106_charger_data *charger, int voter, int va
 
 	if ((set_val & REG_MODE_OTG_TX) && (set_val & REG_MODE_BUCK)) {
 		if (set_val & REG_MODE_OTG) {
-#if defined(CONFIG_WIRELESS_CHARGER_MFC_S2MIW04)
-			union power_supply_propval value = {0,};
-#endif
 			pr_info("%s: OTG_BUCK\n", __func__);
 			if ((reg & REG_MODE_OTG) && !(reg & REG_MODE_BUCK)) {
 				msleep(200);
@@ -164,12 +161,6 @@ static void regmode_vote(struct s2mu106_charger_data *charger, int voter, int va
 				s2mu106_update_reg(charger->i2c, 0x30, 0x04, 0x0C); // OTG PATH OFF
 				enable_irq(charger->irq_otg);
 			}
-#if defined(CONFIG_WIRELESS_CHARGER_MFC_S2MIW04)
-			/* wireless(otg) -> wirless + otg */
-			value.intval = 1;
-			psy_do_property(charger->pdata->wireless_charger_name, set,
-					POWER_SUPPLY_EXT_PROP_WIRELESS_TXMODE_DISCON, value);
-#endif
 		} else if (set_val & REG_MODE_TX) {
 			pr_info("%s: TX_BUCK\n", __func__);
 			if ((reg & REG_MODE_TX) && !(reg & REG_MODE_BUCK)) {

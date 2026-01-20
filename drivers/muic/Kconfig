@@ -317,60 +317,12 @@ config MUIC_S2MU005_DISCHARGING_WA
 	  If you say yes here you will get support for
 	  for the S2MU005 MUIC chip DISCHARGING WA feature.
 
-config MUIC_MAX77705
-        bool "Using MAX77705 MUIC"
-        depends on USE_MUIC
-        default n
-        help
-          If you say yes here you will get support for
-          the MAX77705 MUIC chip.
-	  To enable this driver,
-	  USE_MUIC should be enabled.
-
-config HV_MUIC_MAX77705_AFC
-        bool "Using MAX77705 AFC MUIC"
-        depends on MUIC_MAX77705
-        default n
-        help
-          If you say yes here you will get support for
-	  the MAX77705 AFC MUIC.
-	  To enable this driver,
-	  MUIC_MAX77705 should be enabled.
-
 config MUIC_UNIVERSAL
 	bool "UNIVERSAL MUIC"
 	depends on USE_MUIC
 	default n
 	help
 	  If you say yes here you will get support for various MUIC chips.
-
-config MUIC_UNIVERSAL_MAX77854
-	bool "MAX77854 MUIC"
-	depends on MUIC_UNIVERSAL
-	default n
-	help
-	  If you say yes here you will get support for the MAX77854 MUIC chip.
-
-config MUIC_UNIVERSAL_MAX77865
-	bool "MAX77865 MUIC"
-	depends on MUIC_UNIVERSAL
-	default n
-	help
-	  If you say yes here you will get support for the MAX77865 MUIC chip.
-
-config MUIC_HV_MAX77854
-	bool "MUIC_HV_MAX77854"
-	depends on MUIC_UNIVERSAL_MAX77854
-	default n
-	help
-	  If you say yes here you will get support for the AFC.
-
-config MUIC_HV_MAX77865
-	bool "MUIC_HV_MAX77865"
-	depends on MUIC_UNIVERSAL_MAX77865
-	default n
-	help
-	  If you say yes here you will get support for the AFC.
 
 config MUIC_NOT_SUPPORT_QC
     bool "MUIC not supports quick charger"
