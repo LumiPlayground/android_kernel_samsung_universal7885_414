@@ -164,6 +164,13 @@ config FUELGAUGE_S2MU005
 	 Ths fuel-gauge supports current tracking and
 	 voltage tracking to model the battery SOC.
 
+config S2MU004_MODE_CHANGE_BY_TOPOFF
+	bool "enable s2mu004 mode change by topoff"
+	depends on FUELGAUGE_S2MU004
+	default n
+	help
+	  Say Y to enable s2mu004 mode change by topoff
+
 config S2MU005_VOLT_MODE_TUNING
 	tristate "S2MU005 volt mode tuning"
 	default n
@@ -315,12 +322,6 @@ config ABNORMAL_BAT_THM_WA
 	default n
 	help
 	  Say Y to enable SW Workaround for abnormal jump in battery thermistor ADC
-
-config S2MU004_MODE_CHANGE_BY_TOPOFF
-	bool "enable s2mu004 mode change by topoff"
-	default n
-	help
-	  Say Y to enable s2mu004 mode change by topoff
 	  
 config A10_FACTORY_MAX_SOC
 	bool "enable maximum store mode SOC in factory binary"

@@ -12,14 +12,13 @@ config EXYNOS_CHIPID
 
 config EXYNOS_BCM_DBG
 	bool "EXYNOS_BCM_DBG driver support"
-	default y
+	default n
 	help
 	  Enable exynos-bcm_dbg driver support
 
 config EXYNOS_BCM_DBG_GNR
 	bool "EXYNOS_BCM_DBG general interface support"
-	depends on !EXYNOS_ADV_TRACER
-	default y
+	depends on EXYNOS_BCM_DBG
 	help
 	  Enable exynos-bcm_dbg general interface support.
 	  The general interface is not used ADV-tracer IPC interface.
