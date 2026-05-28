@@ -1340,6 +1340,14 @@ static int kbase_api_negative_boost(struct kbase_context *kctx,
 	return gpu_vendor_dispatch(kctx, flags->flags);
 }
 
+/* MALI_SEC_INTEGRATION */
+static int kbase_api_slsi_mem_usage_add(struct kbase_context *kctx,
+       struct kbase_ioctl_slsi_mem_usage_add *data)
+{
+	kctx->mem_usage = data->gl_mem_usage;
+
+	return 0;
+}
 
 static int kbase_api_sticky_resource_map(struct kbase_context *kctx,
 		struct kbase_ioctl_sticky_resource_map *map)
@@ -1778,6 +1786,13 @@ static long kbase_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		KBASE_HANDLE_IOCTL_IN(KBASE_IOCTL_SLSI_NEGATIVE_BOOST_FLAGS,
 				kbase_api_negative_boost,
 				struct kbase_ioctl_slsi_negative_boost_flags,
+				kctx);
+		break;
+		/* MALI_SEC_INTEGRATION */
+	case KBASE_IOCTL_SLSI_MEM_USAGE_ADD:
+	    KBASE_HANDLE_IOCTL_IN(KBASE_IOCTL_SLSI_MEM_USAGE_ADD,
+				kbase_api_slsi_mem_usage_add,
+				struct kbase_ioctl_slsi_mem_usage_add,
 				kctx);
 		break;
 	}

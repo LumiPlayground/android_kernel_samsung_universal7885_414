@@ -1748,6 +1748,9 @@ struct kbase_context {
 #ifdef CONFIG_MALI_SEC_VK_BOOST
 	bool ctx_vk_need_qos;
 #endif
+	/* MALI_SEC_INTEGRATION */
+	u64 mem_usage;
+
 	struct kbase_kinstr_jm *kinstr_jm;
 	struct list_head tl_kctx_list_node;
 };
