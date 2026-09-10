@@ -471,7 +471,6 @@ static void exynos_dump_info(void *val)
 			exynos_cpu_err_parse(CPUMERRSR, reg1);
 			exynos_cpu_err_parse(L2MERRSR, reg2);
 			break;
-		case ARM_CPU_PART_ANANKE:
 		case ARM_CPU_PART_CORTEX_A73:
 			asm volatile ("mrs %0, S3_1_c11_c0_3\n\t"
 					"mrs %1, S3_1_c15_c2_3\n"
@@ -480,6 +479,7 @@ static void exynos_dump_info(void *val)
 			exynos_cpu_err_parse(L2ECTLR_EL1, reg1);
 			exynos_cpu_err_parse(L2MERRSR, reg2);
 			break;
+		case ARM_CPU_PART_ANANKE:
 		case ARM_CPU_PART_CORTEX_A75:
 			asm volatile ("HINT #16");
 			asm volatile ("mrs %0, S3_0_c12_c1_1\n" : "=r" (reg1)); /* read DISR_EL1 */
