@@ -428,7 +428,30 @@ static void exynos_dump_info(void *val)
 		switch (read_cpuid_part_number()) {
 		case ARM_CPU_PART_MONGOOSE:
 		case ARM_CPU_PART_MEERKAT:
-			break;
+			asm volatile ("mrs %0, S3_1_c15_c2_0\n\t"
+				"mrs %1, S3_1_c15_c2_4\n"
+				: "=r" (reg1), "=r" (reg2));
+			pr_emerg("FEMERR0SR: %016lx, FEMERR1SR: %016lx\n", reg1, reg2);
+			exynos_cpu_err_parse(FEMERR0SR, reg1);
+			exynos_cpu_err_parse(FEMERR1SR, reg2);
+			asm volatile ("mrs %0, S3_1_c15_c2_1\n\t"
+				"mrs %1, S3_1_c15_c2_5\n"
+				: "=r" (reg1), "=r" (reg2));
+			pr_emerg("LSMERR0SR: %016lx, LSMERR1SR: %016lx\n", reg1, reg2);
+			exynos_cpu_err_parse(LSMERR0SR, reg1);
+			exynos_cpu_err_parse(LSMERR1SR, reg2);
+			asm volatile ("mrs %0, S3_1_c15_c2_2\n\t"
+				"mrs %1, S3_1_c15_c2_6\n"
+				: "=r" (reg1), "=r" (reg2));
+			pr_emerg("TBWMERR0SR: %016lx, TBWMERR1SR: %016lx\n", reg1, reg2);
+			exynos_cpu_err_parse(TBWMERR0SR, reg1);
+			exynos_cpu_err_parse(TBWMERR1SR, reg2);
+			asm volatile ("mrs %0, S3_1_c15_c2_3\n\t"
+				"mrs %1, S3_1_c15_c2_7\n"
+				: "=r" (reg1), "=r" (reg2));
+			pr_emerg("L2MERR0SR: %016lx, L2MERR1SR: %016lx\n", reg1, reg2);
+			exynos_cpu_err_parse(L2MERR0SR, reg1);
+			exynos_cpu_err_parse(L2MERR1SR, reg2);
 		default:
 			break;
 		}
@@ -486,7 +509,6 @@ static void exynos_dump_info(void *val)
 			pr_emerg("DSU : ERXSTATUS_EL1: %016lx, ERXADDR_EL1: %016lx, "
 					"ERXMISC0_EL1: %016lx\n", reg1, reg2, reg3);
 			exynos_cpu_err_parse(ERXSTATUS_EL1, reg1);
-
 			break;
 		default:
 			break;
